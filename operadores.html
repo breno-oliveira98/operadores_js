@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="row mt-4">
+        <div class="col-md-10 offset-md-1">
+            <form action="">
+                <div class="row">
+                    <div class="col-10">
+                        <input type="text" class="form-control" id="nome">
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-success" id="btn_salvar">Salvar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div id="quantidade"></div>
+
+
+    <script>
+        const lista = [];
+
+        function listarDados() {
+            const tbody = document.querySelector("#lista")
+            let html = '';
+            lista.forEach( (nome, indice) => {
+                html += `
+                    <tr>
+                        <td>${indice}</td>
+                        <td>${nome}</td>
+                        <td>
+                            <button class="btn btn-danger">Excluir</button>
+                        </td>
+                    </tr>
+                `
+            })
+            tbody.innerHTML = html  
+        }
+
+        function exibirQuantidade() {
+            const divQuantidade = document.querySelector('#quantidade')
+            divQuantidade.innerHTML = "Quantidade: " + lista.length;
+        }
+
+        exibirQuantidade()
+
+        const btn_salvar = document.querySelector('#btn_salvar')
+        btn_salvar.addEventListener('click', () => {
+           const campo = document.querySelector('#nome')
+           const nome = campo.value;
+           if(nome !== '' && nome.length >= 3) {
+                lista.push(nome)
+                campo.value = '';
+                exibirQuantidade()
+                listarDados()
+            } else {
+                alert("Nome obrigatório. Deve conter no minimo 3 caracteres")
+            }
+        })
+
+        // CRIE UM ARRAY, CRIE UM CAMPO ACIMA COM HTML,
+        // AO INSERIR DADOS NO CAMPO E CLICAR EM SALVAR
+        // O ARRAY DEVE SER ALIMETADO COM O MÉTODO PUSH
+
+    </script>
+
+
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Sequencial</th>
+                <th>Nome</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody id="lista">
+            <tr>
+                <td>1</td>
+                <td>Max</td>
+                <td>
+                    <button class="btn btn-danger">Excluir</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+
+</body>
+
+</html>
